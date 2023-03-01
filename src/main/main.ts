@@ -25,12 +25,6 @@ class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
-});
-
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -71,8 +65,14 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    width: 860,
+    height: 550,
+    minWidth: 860,
+    minHeight: 500,
+    // resizable: false,
+    // hides the title bar and introduces an overlay for the controls
+    // !! make sure to fix dragging issue later
+    titleBarStyle: 'hidden',
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: app.isPackaged
@@ -81,6 +81,7 @@ const createWindow = async () => {
     },
   });
 
+  // mainWindow.setAspectRatio(1.1.56363636364
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
   mainWindow.on('ready-to-show', () => {
@@ -115,6 +116,9 @@ const createWindow = async () => {
 /**
  * Add event listeners...
  */
+ipcMain.handle('close', () => mainWindow?.close())
+
+ipcMain.handle('mini', () => mainWindow?.minimize())
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even

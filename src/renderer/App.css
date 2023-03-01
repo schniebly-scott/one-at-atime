@@ -1,22 +1,26 @@
+@import 'https://fonts.googleapis.com/css?family=Nunito+Sans';
+
 /*
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 body {
   position: relative;
-  color: white;
+  color: #e3e8e3;
   height: 100vh;
-  background: linear-gradient(
-    200.96deg,
-    #fedc2a -29.09%,
-    #dd5789 51.77%,
-    #7a2c9e 129.35%
-  );
   font-family: sans-serif;
   overflow-y: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Nunito Sans';
+  font-weight: 200;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -53,10 +57,130 @@ a:hover {
   opacity: 1;
   text-decoration: none;
 }
+/* -----------------------------------------------------------------------------------------------------------
+                 Main Stuff
+---------------------------------------------------------------------------------------------------*/
+#root {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
 
-.Hello {
+.main {
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+.content {
+  width: 100%;
+  float: left;
+}
+
+.top {
+  height: 55%;
+  width: 100%;
+  float: left;
+}
+
+.bottom {
+  height: 45%;
+  width: 100%;
+  float: left;
+}
+
+@media screen {
+
+  /* start of screen rules. */
+
+  /* Generic pane rules */
+  body { margin: 0 }
+  .row, .col { overflow: hidden; position: absolute; }
+  .row { left: 0; right: 0; }
+  .col { top: 0; bottom: 0; }
+  .scroll-x { overflow-x: auto; }
+  .scroll-y { overflow-y: auto; }
+
+  .header.row { height: 75px; top: 0; }
+  .content.row { top: 30px; bottom: 0px; }
+
+  /* end of screen rules. */
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Topbar
+---------------------------------------------------------------------------------------------------*/
+.TopBar {
+  background-color: #2e333e;
+  width: 100%;
+  height: 30px;
+  float: left;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
+  overflow: hidden;
+  padding-right: 1px;
+  box-sizing: border-box;
+}
+
+.draggable {
+  width: 100%;
+  height: 100%;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+.draggable p {
+  margin: 4px 0px 4px 9px;
+  opacity: 70%;
+}
+
+.Controls {
+  display: flex;
+}
+
+.Controls button {
+  height: 50%;
+
+  justify-content: center;
+  background-color: #2e333e;
+  color: #66635a;
+  /* border-left: 1mm solid #66635A; */
+  outline: none;
+  transition: all linear 400ms;
+}
+
+.Controls button:hover {
+  background-color: #404655;
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Calendar
+---------------------------------------------------------------------------------------------------*/
+
+.Calendar {
+  background-color: #66635a;
+  width: 100%;
+  height: 100%;
+  float: left;
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Todo
+---------------------------------------------------------------------------------------------------*/
+.Todo {
+  background-color: #7e999f;
+  float: left;
+  width: 65%;
+  height: 100%;
+}
+
+/* -----------------------------------------------------------------------------------------------------------
+                 Sidebar
+---------------------------------------------------------------------------------------------------*/
+.Sidebar {
+  background-color: #4e535b;
+  height: 100%;
+  width: 35%;
+  float: left;
 }
